@@ -15,9 +15,9 @@ class Api {
         this.baseUrl = baseUrl;
 
         this.posts = {
-            getPosts: async () => (await this.get('/notes')).json(),
-            addPost: async (data: any) => this.postJson('/notes', data),
-            deletePost: async (id: string) => this.delete(`/notes/${id}`),
+            getPosts: async () => (await this.get('/posts')).json(),
+            addPost: async (data: any) => this.postJson('/posts', data),
+            deletePost: async (id: string) => this.delete(`/posts/${id}`),
         };
         this.utils = {
             ping: () => this.get('/ping'),

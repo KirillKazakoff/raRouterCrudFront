@@ -9,56 +9,39 @@ import Main from './routes/Main';
 import Observe from './routes/Observe';
 import Edit from './routes/Edit';
 
-import postList from './logic/ContentList';
+// import postList from './logic/ContentList';
 import { SubmitClosure, ContentType } from './data/initContent';
 import Create from './routes/Create';
+import useGet from './request/useGet';
+// import postList from './logic/ContentList';
 import api from './request/api';
-import useJsonFetch from './request/useJsonFetch';
-
-const baseUrl = 'local';
 
 export default function App() {
-    const [loading, setLoading] = useState(false);
-    const [data, setData] = useState<ContentType[]>([]);
+    const { postList, setData, loading } = useGet('INIT');
 
-    useEffect(() => {
-        const fetchFunc = async () => {
-            setLoading(true);
-
-            const response = await fetch('http://localhost:9091/posts');
-            const jsonData = await response.json();
-
-            setData(jsonData.data);
-            setLoading(false);
-        };
-
-        fetchFunc();
-    }, []);
-
-    const [posts, setPosts] = useState(postList.data);
+    console.log(postList.data);
     const onCreate: SubmitClosure = (item) => (e) => {
         postList.add(item);
-        setPosts(postList.getData());
+        setData(postList.getData());
+        api.posts.addPost(item);
     };
 
     const onEdit: SubmitClosure = (item) => (e) => {
-        const index = postList.findItemIndex(item.id);
-        postList.remove(index);
-        onCreate(item)(e);
+        // const index = postList.findItemIndex(item.id);
+        // postList.remove(index);
+        // onCreate(item)(e);
     };
 
-    // const { data } = useJsonFetch('http://localhost:9091/posts', null);
-    // postList.data = data;
-    // console.log(data);
+    if (loading) return <div>Loading ...</div>;
 
     return (
         <Box variant='layout'>
             <Router>
                 <Routes>
-                    <Route path='/' element={<Main contentState={posts} />} />
+                    <Route path='/' element={<Main contentState={postList.data} />} />
                     <Route
                         path='/posts/:postId'
-                        element={<Observe setPosts={setPosts} />}
+                        element={<Observe setPosts={() => console.log('hello')} />}
                     />
                     <Route
                         path='/posts/edit/:postId'

@@ -4,7 +4,7 @@ class ContentList<T extends { id: string | number }> {
     data: T[];
 
     constructor(content: T[]) {
-        this.data = content;
+        this.data = [];
     }
 
     getData() {
