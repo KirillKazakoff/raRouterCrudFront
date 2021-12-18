@@ -1,26 +1,28 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+
 import Post from '../components/lib/Post';
 import { Box } from '../components/primitives/Box';
 import Button from '../components/primitives/Button';
 import { Flex } from '../components/primitives/Flex';
 import SNavLink from '../components/primitives/NavLink';
-import { SetPostType } from '../data/initContent';
 import BackButton from '../components/lib/BackButton';
 import AbsoluteBox from '../components/primitives/AbsoluteBox';
-import postList from '../logic/ContentList';
 
-type ObserveProps = { setPosts: SetPostType };
+import { ContentType } from '../data/initContent';
 
-export default function Observe({ setPosts }: ObserveProps) {
+type ObserveProps = { contentState: ContentType[]; apiMethod: (id: string) => void };
+
+export default function Observe({ contentState, apiMethod }: ObserveProps) {
     const params = useParams();
-    const navigation = useNavigate();
+    const navigate = useNavigate();
 
-    const item = postList.getItem(params.postId as string);
-    const removeHandler = (id: string) => () => {
-        postList.remove(id);
-        setPosts(postList.getData());
-        navigation('/');
+    const item = contentState.find((dItem) => dItem.id === params.postId);
+    if (!item) return <div>Error</div>;
+
+    const onClick = () => {
+        apiMethod(item.id);
+        navigate('/');
     };
 
     return (
@@ -36,7 +38,7 @@ export default function Observe({ setPosts }: ObserveProps) {
                 <Button variant='boxButton' bg='hint'>
                     <SNavLink to={`/posts/edit/${item.id}`}>Изменить</SNavLink>
                 </Button>
-                <Button variant='boxButton' bg='darkred' onClick={removeHandler(item.id)}>
+                <Button variant='boxButton' bg='darkred' onClick={onClick}>
                     Удалить
                 </Button>
             </Flex>

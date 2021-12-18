@@ -1,7 +1,7 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
 import { useNavigate } from 'react-router-dom';
-import { SubmitClosure } from '../../data/initContent';
+import { ContentType, SubmitClosure } from '../../data/initContent';
 import { Flex } from '../primitives/Flex';
 import Form from '../primitives/Form';
 import Textarea from '../primitives/Textarea';
@@ -11,11 +11,11 @@ import BackButton from './BackButton';
 import SubmitButton from './SubmitButton';
 import { Text } from '../primitives/Text';
 
-type CreateFormProps = BoxProps & { onSubmitClosure: SubmitClosure };
+type CreateFormProps = BoxProps & { apiMethod: (item: ContentType) => void };
 export default function CreateForm({
     defaultValue,
     id,
-    onSubmitClosure,
+    apiMethod,
     ...props
 }: CreateFormProps) {
     const navigation = useNavigate();
@@ -38,7 +38,7 @@ export default function CreateForm({
             time: '20:04',
         };
 
-        onSubmitClosure(postObj)(e);
+        apiMethod(postObj);
         navigation('/');
         return true;
     };
