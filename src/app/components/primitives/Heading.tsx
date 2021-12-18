@@ -5,13 +5,19 @@ import { textCompose } from './styledCompose';
 import { HeadingProps } from './rebassTypes';
 
 const headingVariants = {
+    h1: {
+        fontSize: '30px',
+        color: 'primary',
+    },
     h2: {
         fontSize: '25px',
         color: 'tan',
     },
 };
 
-const Heading = styled.h2<HeadingProps>`
+type MyHeadingProps = {} & HeadingProps;
+
+const Heading = styled.h2<MyHeadingProps>`
     ${textCompose()};
     ${variant({ variants: headingVariants })}
 `;

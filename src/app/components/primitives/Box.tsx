@@ -26,4 +26,4 @@ export const boxVariants = {
     },
 };
 
-export const Box = styled.div<BoxProps>(boxCompose(), variant({ variants: boxVariants }));
+export const Box = styled.div<BoxProps>(variant({ variants: boxVariants }), boxCompose());

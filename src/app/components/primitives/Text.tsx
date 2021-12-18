@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { textCompose } from './styledCompose';
 import { TextProps } from './rebassTypes';
 
-export const Text = styled.span<TextProps>`
+type MyTextProps = {} & TextProps;
+
+export const Text = styled.span<MyTextProps>`
     ${textCompose()};
 `;

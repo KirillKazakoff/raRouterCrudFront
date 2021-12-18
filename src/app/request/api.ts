@@ -5,19 +5,19 @@ class Api {
         ping: () => void;
     };
 
-    notes: {
-        getNotes: () => any;
-        addNote: (data: any) => any;
-        deleteNote: (id: string) => any;
+    posts: {
+        getPosts: () => any;
+        addPost: (data: any) => any;
+        deletePost: (id: string) => any;
     };
 
     constructor(baseUrl: string) {
         this.baseUrl = baseUrl;
 
-        this.notes = {
-            getNotes: async () => (await this.get('/notes')).json(),
-            addNote: async (data: any) => this.postJson('/notes', data),
-            deleteNote: async (id: string) => this.delete(`/notes/${id}`),
+        this.posts = {
+            getPosts: async () => (await this.get('/notes')).json(),
+            addPost: async (data: any) => this.postJson('/notes', data),
+            deletePost: async (id: string) => this.delete(`/notes/${id}`),
         };
         this.utils = {
             ping: () => this.get('/ping'),

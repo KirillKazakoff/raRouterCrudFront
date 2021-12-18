@@ -9,6 +9,7 @@ const buttonVariants = {
     ...boxVariants,
     cancel: {
         color: 'red',
+        fontSize: '20px',
         bg: 'white',
         border: '2px solid red',
         borderRadius: '100px',

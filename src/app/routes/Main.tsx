@@ -9,19 +9,24 @@ import { ContentType } from '../data/initContent';
 type MainProps = { contentState: ContentType[] };
 
 export default function Main({ contentState }: MainProps) {
-    const posts = contentState.map((item) => <Post key={item.id} postData={item} />);
+    const posts = contentState.map((item) => (
+        <SNavLink to={`/posts/${item.id}`} key={item.id}>
+            <Post postData={item} />
+        </SNavLink>
+    ));
 
     return (
         <Box>
             <Button
                 variant='boxButton' ml='auto' mb='10px'
-                bg='blue'
+                bg='blue' p='0'
             >
-                <SNavLink to='create'>Create New Post</SNavLink>
+                <SNavLink to='posts/create' p={2}>
+                    Create New Post
+                </SNavLink>
             </Button>
 
             <Box>{posts}</Box>
-            <Outlet />
         </Box>
     );
 }
