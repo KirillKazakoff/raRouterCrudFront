@@ -1,6 +1,5 @@
 /* eslint-disable object-curly-newline */
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import { ContentType } from '../../data/initContent';
 import { Box } from '../primitives/Box';
 import { Flex } from '../primitives/Flex';
@@ -12,9 +11,6 @@ import { Text } from '../primitives/Text';
 type PostProps = { postData: ContentType } & BoxProps;
 
 export default function Post({ postData, ...props }: PostProps) {
-    const location = useLocation();
-    console.log(postData);
-
     const { username, note, id, avatar, time } = postData;
     return (
         <Box

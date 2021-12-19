@@ -1,37 +1,37 @@
-import { initContent, ContentType } from '../data/initContent';
+// import { initContent, ContentType } from '../data/initContent';
 
-class ContentList<T extends { id: string | number }> {
-    data: T[];
+// class ContentList<T extends { id: string | number }> {
+//     data: T[];
 
-    constructor(content: T[]) {
-        this.data = [];
-    }
+//     constructor(content: T[]) {
+//         this.data = [];
+//     }
 
-    getData() {
-        return [...this.data];
-    }
+//     getData() {
+//         return [...this.data];
+//     }
 
-    add(item: T) {
-        this.data.push(item);
-    }
+//     add(item: T) {
+//         this.data.push(item);
+//     }
 
-    refresh(dataNew: T[]) {
-        this.data = dataNew;
-    }
+//     refresh(dataNew: T[]) {
+//         this.data = dataNew;
+//     }
 
-    remove(id: string | number) {
-        const deleteIndex = this.findItemIndex(id);
-        this.data.splice(deleteIndex, 1);
-    }
+//     remove(id: string | number) {
+//         const deleteIndex = this.findItemIndex(id);
+//         this.data.splice(deleteIndex, 1);
+//     }
 
-    findItemIndex(id: string | number) {
-        return this.data.findIndex((item) => item.id.toString() === id);
-    }
+//     findItemIndex(id: string | number) {
+//         return this.data.findIndex((item) => item.id.toString() === id);
+//     }
 
-    getItem(id: string | number) {
-        return this.data[this.findItemIndex(id)];
-    }
-}
+//     getItem(id: string | number) {
+//         return this.data[this.findItemIndex(id)];
+//     }
+// }
 
-const postList = new ContentList<ContentType>(initContent);
-export default postList;
+// const postList = new ContentList<ContentType>(initContent);
+// export default postList;

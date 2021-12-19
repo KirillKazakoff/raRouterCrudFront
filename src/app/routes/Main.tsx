@@ -1,5 +1,4 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
 import Post from '../components/lib/Post';
 import { Box } from '../components/primitives/Box';
 import Button from '../components/primitives/Button';
